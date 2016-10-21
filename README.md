@@ -24,8 +24,7 @@ Desejável
  
 Mockup
 ======
-Acesse [zeplin.io](https://zeplin.io/)
-Dados para login:
+Acesse [zeplin.io](https://zeplin.io/) com os dados:
 
         user: medicinia
     password: medicinia
@@ -52,7 +51,7 @@ Foram criados testes? Os testes são de simples manutenção, caso seja necessá
 
 A performance foi considerada?
 
+Bom Trabalho!
+======
+
 Você é livre para incrementar seu teste de modo a demonstrar como o resultado do seu esforço pode deixá-lo ainda melhor!
-
-
-Bom trabalho!
