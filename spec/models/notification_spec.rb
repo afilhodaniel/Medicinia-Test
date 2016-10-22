@@ -6,7 +6,7 @@ RSpec.describe Notification, type: :model do
   end
 
   context 'validations' do
-    it { should validate_presence_of(:type) }
+    it { should validate_presence_of(:category) }
     it { should validate_presence_of(:note) }
   end
 end

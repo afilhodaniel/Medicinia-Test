@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::UsersController, type: :controller do
+RSpec.describe Api::V1::NotificationsController, type: :controller do
   before {
     @current_user = FactoryGirl.create(:user)
     session[:current_user_id] = @current_user.id
@@ -8,10 +8,12 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe "#index" do
     context "when the request is made in json format" do
+      let(:notifications) { create_list(:notification, 10) }
+      
       before { get :index, format: :json }
 
-      it "gets an array of users" do
-        expect(assigns(:users)).to eq([@current_user])
+      it "gets an array of notifications" do
+        expect(assigns(:notifications)).to eq(notifications)
       end
 
       it "render the :index template" do
@@ -29,12 +31,14 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   end
 
   describe "#show" do
-    context "when the request has valid fields" do
-      before { get :show, id: @current_user.id, format: :json }
+    let(:notification) { FactoryGirl.create(:notification) }
 
-      it "gets an user object" do
+    context "when the request has valid fields" do
+      before { get :show, id: notification.id, format: :json }
+
+      it "gets a notification object" do
         expect(assigns(:errors)).to be_falsy
-        expect(assigns(:user)).to eq(@current_user)
+        expect(assigns(:notification)).to eq(notification)
       end
 
       it "render the :show template" do
@@ -53,7 +57,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     context "when the request is made in other format other than json" do
       it "raise unknown format error" do
         expect {
-          get :show, id: @current_user.id
+          get :show, id: notification.id
         }.to raise_error ActionController::UnknownFormat
       end
     end
@@ -61,11 +65,11 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe "#create" do
     context "when the request has valid fields" do
-      before { post :create, user: FactoryGirl.attributes_for(:user), format: :json }
+      before { post :create, notification: FactoryGirl.attributes_for(:notification), format: :json }
       
-      it "gets a valid user object" do
+      it "gets a valid notification object" do
         expect(assigns(:errors)).to be_falsy
-        expect(assigns(:user)).to be_truthy
+        expect(assigns(:notification)).to be_truthy
       end
 
       it "return the :success template" do
@@ -74,11 +78,11 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
 
     context "when de request has invalid fields" do
-      before { post :create, user: FactoryGirl.attributes_for(:user, password_confirmation: nil), format: :json }
+      before { post :create, notification: FactoryGirl.attributes_for(:notification, category: nil), format: :json }
 
-      it "gets an invalid user object" do
+      it "gets an invalid notification object" do
         expect(assigns(:errors)).to be_truthy
-        expect(assigns(:user)).to be_truthy
+        expect(assigns(:notification)).to be_truthy
       end
 
       it "return the :error template" do
@@ -89,19 +93,21 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     context "when the request is made in other format than json" do
       it "raise unknown format error" do
         expect {
-          post :create, user: FactoryGirl.attributes_for(:user)
+          post :create, notification: FactoryGirl.attributes_for(:notification)
         }.to raise_error ActionController::UnknownFormat
       end
     end
   end
 
   describe "#update" do
-    context "when the request has valid fields" do
-      before { put :update, id: @current_user.id, user:FactoryGirl.attributes_for(:user, name: Faker::Name.name), format: :json }
+    let(:notification) { FactoryGirl.create(:notification) }
 
-      it "gets a valid user object" do
+    context "when the request has valid fields" do
+      before { put :update, id: notification.id, notification: FactoryGirl.attributes_for(:notification, category: Faker::Number.between(0, 2)), format: :json }
+
+      it "gets a valid notification object" do
         expect(assigns(:errors)).to be_falsy
-        expect(assigns(:user)).to be_truthy
+        expect(assigns(:notification)).to be_truthy
       end
 
       it "render the :success template" do
@@ -110,11 +116,11 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
 
     context "when the request has invalid fields" do
-      before { put :update, id: @current_user.id, user:FactoryGirl.attributes_for(:user, name: nil), format: :json }
+      before { put :update, id: notification.id, notification: FactoryGirl.attributes_for(:notification, category: nil), format: :json }
 
-      it "gets a invalid user object" do
+      it "gets a invalid notification object" do
         expect(assigns(:errors)).to be_truthy
-        expect(assigns(:user)).to be_truthy
+        expect(assigns(:notification)).to be_truthy
       end
 
       it "return the :error template" do
@@ -125,19 +131,21 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     context "when the request is made in other format than json" do
       it "raise unknown format error" do
         expect {
-          put :update, id: @current_user.id, user:FactoryGirl.attributes_for(:user, name: nil)
+          put :update, id: notification.id, notification: FactoryGirl.attributes_for(:notification)
         }.to raise_error ActionController::UnknownFormat
       end
     end
   end
 
   describe "#delete" do
-    context "when the request has valid fields" do
-      before { delete :destroy, id: @current_user.id, format: :json }
+    let(:notification) { FactoryGirl.create(:notification) }
 
-      it "gets a valid user object" do
+    context "when the request has valid fields" do
+      before { delete :destroy, id: notification.id, format: :json }
+
+      it "gets a valid notification object" do
         expect(assigns(:errors)).to be_falsy
-        expect(assigns(:user)).to be_truthy
+        expect(assigns(:notification)).to be_truthy
       end
 
       it "return the :success template" do
@@ -148,7 +156,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     context "when the request has invalid fields" do
       it "raise record not found error" do
         expect {
-          delete :destroy, id: 9999, format: :json
+          delete :destroy, id: 0, format: :json
         }.to raise_error ActiveRecord::RecordNotFound
       end
     end
@@ -156,7 +164,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     context "when the request is made in other format than json" do
       it "raise unknown format errorr" do
         expect {
-          delete :destroy, id: @current_user.id
+          delete :destroy, id: notification.id
         }.to raise_error ActionController::UnknownFormat
       end
     end
