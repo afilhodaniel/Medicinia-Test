@@ -5,7 +5,11 @@ class ApplicationController < ActionController::Base
   before_action :set_current_user
 
   def index
-    render :index
+    if is_authenticated
+      render :notifications
+    else
+      render :index
+    end
   end
 
   private

@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h1><i class="icon icon-notifications"></i> Notificações</h1>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <time class="notification-item-date">21/01/16 - 17:30</time>
+        <div class="notification-item-category">
+          <i class="icon icon-appointment"></i>
+          Consulta
+        </div>
+        <div class="notification-item-content">
+          <p><strong>Observações:</strong></p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit culpa laboriosam placeat, velit officiis provident. Dolor labore, quasi totam beatae dignissimos tenetur sint corporis porro. Aperiam veniam qui similique tempora.</p>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <a class="notification-item-option" href="javascript:void(0);" title="Responder">
+          <i class="icon icon-answer"></i> Responder
+        </a>
+        <a class="notification-item-option" href="javascript:void(0);" title="Confirmar">
+          <i class="icon icon-confirm"></i> Confirmar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= form_for :notification, url: api_v1_notifications_path(format: :json), method: :post do |f| %>
+          <div class="form-group">
+            <h2>Filtrar</h2>
+          </div>
+          <div class="form-group">
+            <%= f.label '#', 'Tipo de notificação:' %>
+          </div>
+          <div class="form-group">
+            <label>
+              <%= f.radio_button :category, Notification::CATEGORY_EXAM %> Exame
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <%= f.radio_button :category, Notification::CATEGORY_APPOINTMENT %> Consulta
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <%= f.radio_button :category, Notification::CATEGORY_SURGERY %> Cirurgia
+            </label>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= form_for :notification, url: api_v1_notifications_path(format: :json), method: :post do |f| %>
+          <div class="form-group">
+            <h2>Buscar</h2>
+          </div>
+          <div class="form-group">
+            <%= f.label :query, 'Observação:' %>
+            <%= f.text_field :query, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.button 'Buscar', type: :submit, class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-3">
+    <aside class="sidebar-right">
+      <%= form_for :notification, url: api_v1_notifications_path(format: :json), method: :post do |f| %>
+        <%= f.hidden_field :user_id, value: @current_user.id %>
+        <div class="form-group">
+          <h2>Criar nova notificação</h2>
+        </div>
+        <div class="form-group">
+          <%= f.label '#', 'Tipo de notificação:' %>
+        </div>
+        <div class="form-group">
+          <label>
+            <%= f.radio_button :category, Notification::CATEGORY_EXAM %> Exame
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            <%= f.radio_button :category, Notification::CATEGORY_APPOINTMENT %> Consulta
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            <%= f.radio_button :category, Notification::CATEGORY_SURGERY %> Cirurgia
+          </label>
+        </div>
+        <div class="form-group">
+          <%= f.label :note, 'Observação' %>
+          <%= f.text_area :note, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.button 'Criar notificação', type: :submit, class: 'btn btn-success' %>
+        </div>
+      <% end %>
+    </aside>
+  </div>
+</div>

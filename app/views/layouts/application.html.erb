@@ -39,7 +39,27 @@
       </div>
     </nav>
     <div class="container-fluid">
-      <%= yield %>
+      <div class="row">
+        <div class="col-xs-12 col-md-1">
+          <aside class="sidebar">
+            <nav class="sidebar-menu">
+              <ul class="sidebar-menu-list">
+                <li class="sidebar-menu-list-item">
+                  <a href="" title="">
+                    <i class="icon icon-notifications"></i>
+                    Notificações
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </aside>
+        </div>
+        <div class="col-xs-12 col-md-11">
+          <div class="content">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
     </div>
     
     <% if Rails.env.development? %>
