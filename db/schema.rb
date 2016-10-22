@@ -14,8 +14,10 @@
 ActiveRecord::Schema.define(version: 20161022174956) do
 
   create_table "notifications", force: :cascade do |t|
-    t.integer  "category",   null: false
-    t.text     "note",       null: false
+    t.integer  "category",                   null: false
+    t.text     "note",                       null: false
+    t.boolean  "confirmed",  default: false
+    t.integer  "user_id",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -19,4 +19,8 @@ RSpec.describe User, type: :model do
     
     it { should have_secure_password }
   end
+
+  context "relationships" do
+    it { should have_many(:notifications) }
+  end
 end

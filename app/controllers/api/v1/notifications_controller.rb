@@ -4,7 +4,7 @@ module Api
       private
         
         def notification_params
-          params.require(:notification).permit(:category, :note)
+          params.require(:notification).permit(:category, :note, :confirmed, :user_id)
         end
         
         def query_params

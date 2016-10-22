@@ -9,4 +9,8 @@ RSpec.describe Notification, type: :model do
     it { should validate_presence_of(:category) }
     it { should validate_presence_of(:note) }
   end
+
+  context 'relationships' do
+    it { should belong_to(:user) }
+  end
 end
