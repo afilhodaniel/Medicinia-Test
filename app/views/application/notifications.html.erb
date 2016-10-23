@@ -28,7 +28,7 @@
         <a class="notification-item-option" href="javascript:void(0);" title="Responder">
           <i class="icon icon-answer"></i> Responder
         </a>
-        <a class="notification-item-option" href="javascript:void(0);" title="Confirmar">
+        <a class="notification-item-option" href="javascript:void(0);" title="Confirmar" ng-click="confirmNotification($event, notification)" ng-class="notification.confirmed ? 'active' : ''">
           <i class="icon icon-confirm"></i> Confirmar
         </a>
       </div>

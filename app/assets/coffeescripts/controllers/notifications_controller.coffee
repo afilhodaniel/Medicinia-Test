@@ -97,6 +97,23 @@
       if data.success
         $scope.notifications.splice($scope.notifications.indexOf(notification), 1)
 
+  $scope.confirmNotification = (event, notification) ->
+    event.preventDefault()
+
+    data = {
+      notification: {
+        confirmed: !notification.confirmed
+      }
+    }
+
+    $http
+      url: '/api/v1/notifications/:id.json?user_id=:user_id'.replace(':id', notification.id).replace(':user_id', USER_ID)
+      method: 'put'
+      data: data
+    .success (data) ->
+      if data.success
+        $scope.notifications[$scope.notifications.indexOf(notification)] = data.notification
+
   bootstrap()
 
 ]

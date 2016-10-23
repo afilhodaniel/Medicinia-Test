@@ -6,7 +6,7 @@ module Api
       before_action :force_authentication
       before_action :set_resource, only: [:show, :update, :destroy]
 
-      skip_before_filter :verify_authenticity_token, only: [:destroy]
+      skip_before_filter :verify_authenticity_token, only: [:update, :destroy]
 
       def index
         resources_name = "@#{resource_name.pluralize}"
