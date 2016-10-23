@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="panel-footer">
-        <a class="notification-item-option" href="javascript:void(0);" title="Responder">
+        <a class="notification-item-option" href="javascript:void(0);" title="Responder" ng-click="toggleComments(notification)">
           <i class="icon icon-answer"></i> Responder
         </a>
         <a class="notification-item-option" href="javascript:void(0);" title="Confirmar" ng-click="confirmNotification($event, notification)" ng-class="notification.confirmed ? 'active' : ''">
@@ -33,14 +33,21 @@
         </a>
       </div>
       <div class="panel-body" style="padding:0;">
-        <div class="notification-item-comments">
-          <textarea class="notification-item-input form-control" placeholder="Escreva uma resposta aqui"></textarea>
+        <div class="notification-item-comments" ng-class="notification.showComments ? 'active' : ''">
+          <%= form_for :comment, url: '#', html: {"ng-submit": "createComment($event, notification)"} do |f| %>
+            <div class="form-group">
+              <%= f.text_area :comment, class: 'notification-item-input form-control', placeholder: 'Escreva uma resposta aqui' %>
+              <small class="text-danger" ng-repeat="error in notification.comment_errors.comment">
+                {{error}}
+              </small>
+            </div>
+            <div class="form-group clearfix">
+              <%= f.button 'Enviar', type: :submit, class: 'btn btn-sm btn-success pull-right' %>
+            </div>
+          <% end %>
           <ul class="notification-item-comments-list">
-            <li class="notification-item-comments-list-item">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat nam pariatur, placeat error impedit? Non reprehenderit, maxime ea minima perspiciatis cupiditate, harum voluptatibus, magnam ducimus quos rerum, quaerat consectetur facere.</p>
-            </li>
-            <li class="notification-item-comment">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat nam pariatur, placeat error impedit? Non reprehenderit, maxime ea minima perspiciatis cupiditate, harum voluptatibus, magnam ducimus quos rerum, quaerat consectetur facere.</p>
+            <li class="notification-item-comments-list-item" ng-repeat="comment in notification.comments">
+              <p>{{comment.comment}}</p>
             </li>
           </ul>
         </div>

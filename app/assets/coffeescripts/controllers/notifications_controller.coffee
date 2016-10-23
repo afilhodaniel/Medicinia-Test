@@ -3,19 +3,40 @@
   CATEGORY_SLUG = ['exam', 'appointment', 'surgery']
   CATEGORY_NAME = ['Exame', 'Consulta', 'Cirurgia']
 
+  $scope.showComments = {}
+
   bootstrap = ->
     $scope.getAllNotifications()
-    listenNewNotifications()
 
-  listenNewNotifications = ->
-    client = new Pusher(PUSHER_KEY)
+    pusher = $pusher(new Pusher(PUSHER_KEY))
 
-    pusher = $pusher(client)
+    listenNewNotifications(pusher)
+    listenNewComments(pusher)
 
+  listenNewNotifications = (pusher) ->
     channel = pusher.subscribe('notification_channel');
 
     channel.bind 'new_notification', (data) ->
       $scope.notifications.unshift data
+
+  listenNewComments = (pusher) ->
+    channel = pusher.subscribe('comment_channel');
+
+    channel.bind 'new_comment', (data) ->
+      if $scope.notifications[$scope.notifications.indexOf(getNotificationById(data.notification_id))].comments
+        $scope.notifications[$scope.notifications.indexOf(getNotificationById(data.notification_id))].comments.unshift data
+      else
+        $scope.notifications[$scope.notifications.indexOf(getNotificationById(data.notification_id))].comments = [data]
+
+  getNotificationById = (id) ->
+    notification = {}
+
+    $scope.notifications.forEach (elem, index) ->
+      if elem.id == id
+        notification = elem
+        return
+
+    return notification
 
   $scope.getAllNotifications = ->
     $http
@@ -113,6 +134,40 @@
     .success (data) ->
       if data.success
         $scope.notifications[$scope.notifications.indexOf(notification)] = data.notification
+
+  $scope.toggleComments = (notification) ->
+    notification.showComments = !notification.showComments
+
+    if notification.showComments
+      $http
+        url: '/api/v1/comments.json?notification_id=:notification_id'.replace(':notification_id', notification.id)
+        method: 'get'
+      .success (data) ->
+        if data.comments.length > 0
+          notification.comments = data.comments
+
+  $scope.createComment = (event, notification) ->
+    event.preventDefault()
+
+    data = {
+      authenticity_token: angular.element(event.target).find('input[name=authenticity_token]')[0].value,
+      comment: {
+        comment: angular.element(event.target).find('textarea[name="comment[comment]"]')[0].value,
+        notification_id: notification.id,
+        user_id: USER_ID
+      }
+    }
+
+    $http
+      url: '/api/v1/comments.json'
+      method: 'post'
+      data: data
+    .success (data) ->
+      if data.success
+        notification.comment_errors = {}
+        angular.element('textarea[name="comment[comment]"]')[0].value = ''
+      else
+        notification.comment_errors = data.errors
 
   bootstrap()
 
