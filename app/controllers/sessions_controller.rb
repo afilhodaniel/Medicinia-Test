@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def signin_post
-    user = User.where("username = ? OR email = ?", sessions_params[:email], sessions_params[:email]).first
+    user = User.where("email = ?", sessions_params[:email]).first
 
     if user and user.authenticate(sessions_params[:password])
       session[:current_user_id] = user.id
@@ -72,7 +72,7 @@ class SessionsController < ApplicationController
   private
 
     def sessions_params
-      params.require(:user).permit(:name, :email, :username, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password)
     end
 
 end
