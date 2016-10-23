@@ -2,7 +2,15 @@ module Api
   module V1
     class NotificationsController < BaseController
       after_action :send_notification, only: [:create]
-      before_action :verify_authority, only: [:index, :show, :update, :destroy]
+      before_action :verify_authority, only: [:index, :show, :update, :destroy, :search]
+
+      def search
+        @notifications = Notification.where('note LIKE ? AND user_id = ?', "%#{query_params[:note]}%", query_params[:user_id]).page(page_params[:page]).per(page_params[:page_size])
+
+        respond_to do |format|
+          format.json { render :index }
+        end
+      end
       
       private
 
@@ -33,7 +41,7 @@ module Api
         end
         
         def query_params
-          params.permit(:id, :user_id, :category)
+          params.permit(:id, :user_id, :category, :note)
         end
     end
   end

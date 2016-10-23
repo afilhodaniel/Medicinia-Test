@@ -31,6 +31,21 @@
     .success (data) ->
       $scope.notifications = data.notifications
 
+  $scope.getNotificationsBySearch = (event) ->
+    event.preventDefault()
+
+    note = angular.element(event.target).find('input[name="notification[note]"]')[0].value
+
+    $http
+      url: '/api/v1/notifications/search.json?user_id=:user_id&note=:note'.replace(':user_id', USER_ID).replace(':note', note)
+      method: 'get'
+    .success (data) ->
+      if data.notifications.length > 0
+        angular.element('.filter-radio')[0].checked = true
+        $scope.notifications = data.notifications
+      else
+        $scope.notifications = []
+
   $scope.getNotificationCategorySlug = (category) ->
     CATEGORY_SLUG[category]
 

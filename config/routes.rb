@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users,         only: [:index, :show, :create, :update, :destroy]
-      resources :notifications, only: [:index, :show, :create, :update, :destroy]
+      resources :notifications, only: [:index, :show, :create, :update, :destroy] do
+        collection do
+          get '/search', action: :search
+        end
+      end
       resources :comments,      only: [:index, :show, :create, :update, :destroy]
     end
   end
