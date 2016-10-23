@@ -55,12 +55,25 @@
       if data.success
         $scope.errors = {}
         clearForm(event)
+        $('html, body').animate({
+          scrollTop: 0
+        })
       else
         $scope.errors = data.errors
 
   clearForm = (event) ->
     angular.element(event.target).find('input[name="notification[category]"]:checked')[0].checked = false
     angular.element(event.target).find('textarea[name="notification[note]"]')[0].value = ''
+
+  $scope.deleteNotification = (event, notification) ->
+    event.preventDefault()
+
+    $http
+      url: '/api/v1/notifications/:id.json?user_id=:user_id'.replace(':id', notification.id).replace(':user_id', USER_ID)
+      method: 'delete'
+    .success (data) ->
+      if data.success
+        $scope.notifications.splice($scope.notifications.indexOf(notification), 1)
 
   bootstrap()
 
