@@ -3,8 +3,6 @@
   CATEGORY_SLUG = ['exam', 'appointment', 'surgery']
   CATEGORY_NAME = ['Exame', 'Consulta', 'Cirurgia']
 
-  $scope.showComments = {}
-
   bootstrap = ->
     $scope.getAllNotifications()
 
@@ -165,7 +163,7 @@
     .success (data) ->
       if data.success
         notification.comment_errors = {}
-        angular.element('textarea[name="comment[comment]"]')[0].value = ''
+        angular.element(event.target).find('textarea[name="comment[comment]"]')[0].value = ''
       else
         notification.comment_errors = data.errors
 
