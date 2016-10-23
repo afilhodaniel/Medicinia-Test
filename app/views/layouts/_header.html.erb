@@ -1,0 +1,25 @@
+<header class="header">
+  <nav class="header-content navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+      <%= link_to 'Medicinia', root_path, class: 'header-logo navbar-brand' %>
+      <div class="navbar-header">
+        <button type="button" class="header-toggle navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="header-menu collapse navbar-collapse" id="collapse">
+        <ul class="header-menu-list nav navbar-nav navbar-right">
+          <% if @current_user %>
+            <li><%= link_to t('link.signout'), sessions_signout_path, title: t('link.signout') %></li>
+          <% else %>
+            <li><%= link_to t('link.signin'), sessions_signin_path, title: t('link.signin') %></li>
+            <li><%= link_to t('link.signup'), sessions_signup_path, title: t('link.signup') %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

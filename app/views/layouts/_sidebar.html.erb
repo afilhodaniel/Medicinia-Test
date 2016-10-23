@@ -1,0 +1,30 @@
+<aside class="sidebar">
+  <nav class="sidebar-menu">
+    <ul class="sidebar-menu-list clearfix">
+      <li class="sidebar-menu-list-item">
+        <%= link_to patients_path, class: @sidebar == :patients ? 'active' : '' do %>
+          <i class="icon icon-patients"></i>
+          Pacientes
+        <% end %>
+      </li>
+      <li class="sidebar-menu-list-item">
+        <%= link_to notifications_path, class: @sidebar == :notifications ? 'active' : '' do %>
+          <i class="icon icon-notifications"></i>
+          Notificações
+        <% end %>
+      </li>
+      <li class="sidebar-menu-list-item">
+        <%= link_to messages_path, class: @sidebar == :messages ? 'active' : '' do %>
+          <i class="icon icon-messages"></i>
+          Conversas
+        <% end %>
+      </li>
+      <li class="sidebar-menu-list-item">
+        <%= link_to tasks_path, class: @sidebar == :tasks ? 'active' : '' do %>
+          <i class="icon icon-tasks"></i>
+          Tarefas
+        <% end %>
+      </li>
+    </ul>
+  </nav>
+</aside>
