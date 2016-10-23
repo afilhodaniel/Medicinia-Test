@@ -4,7 +4,7 @@
   CATEGORY_NAME = ['Exame', 'Consulta', 'Cirurgia']
 
   bootstrap = ->
-    getAllNotifications()
+    $scope.getAllNotifications()
     listenNewNotifications()
 
   listenNewNotifications = ->
@@ -17,9 +17,16 @@
     channel.bind 'new_notification', (data) ->
       $scope.notifications.unshift data
 
-  getAllNotifications = ->
+  $scope.getAllNotifications = ->
     $http
       url: '/api/v1/notifications.json?user_id=:user_id'.replace(':user_id', USER_ID)
+      method: 'get'
+    .success (data) ->
+      $scope.notifications = data.notifications
+
+  $scope.getNotificationsByCategory = (category) ->
+    $http
+      url: '/api/v1/notifications.json?user_id=:user_id&category=:category'.replace(':user_id', USER_ID).replace(':category', category)
       method: 'get'
     .success (data) ->
       $scope.notifications = data.notifications

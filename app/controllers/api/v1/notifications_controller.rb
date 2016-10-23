@@ -33,7 +33,7 @@ module Api
         end
         
         def query_params
-          params.permit(:id, :user_id)
+          params.permit(:id, :user_id, :category)
         end
     end
   end
