@@ -1,1 +1,1 @@
-this.window[APP_NAME].controller("AppController",function(){});
+this.window[APP_NAME].controller("AppController",["$scope",function(e){return e.getDate=function(e){return e=new Date(e),":date/:month/:year - :hours::minutes".replace(":date",e.getDate()).replace(":month",e.getMonth()+1).replace(":year",e.getFullYear()).replace(":hours",e.getHours()).replace(":minutes",e.getMinutes())}}]);

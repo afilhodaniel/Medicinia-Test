@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="RailsApp" ng-cloak>
+<html ng-app="Medicinia" ng-cloak>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -89,10 +89,19 @@
     <% if Rails.env.development? %>
       <%= javascript_include_tag 'http://localhost:35729/livereload.js' %>
     <% end %>
+
+    <% if @current_user %>
+      <script>
+        var USER_ID = "<%= @current_user.id %>";
+        var PUSHER_KEY = "<%= ENV['PUSHER_KEY']%>";
+      </script>
+    <% end %>
     
     <%= javascript_include_tag '/vendor/jquery/dist/jquery.min.js' %>
     <%= javascript_include_tag '/vendor/angular/angular.min.js' %>
     <%= javascript_include_tag '/vendor/bootstrap/dist/js/bootstrap.min.js' %>
+    <%= javascript_include_tag '/vendor/pusher-websocket-iso/dist/web/pusher.js' %>
+    <%= javascript_include_tag '/vendor/pusher-angular/lib/pusher-angular.min.js' %>
     <%= javascript_include_tag 'application' %>
   </body>
 </html>

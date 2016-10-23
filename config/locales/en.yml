@@ -21,7 +21,7 @@
 
 en:
   app:
-    title: 'RailsApp'
+    title: 'Medicinia'
   title:
     signin: 'Signin'
     signup: 'Signup'

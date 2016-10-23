@@ -10,6 +10,7 @@ gem 'httparty'
 gem 'nokogiri'
 gem 'kaminari'
 gem 'rails_admin'
+gem 'pusher'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'

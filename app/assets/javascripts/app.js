@@ -1,1 +1,1 @@
-this.APP_NAME="RailsApp",this.window[APP_NAME]=angular.module(APP_NAME,[]);
+this.APP_NAME="Medicinia",this.window[APP_NAME]=angular.module(APP_NAME,["pusher-angular"]);

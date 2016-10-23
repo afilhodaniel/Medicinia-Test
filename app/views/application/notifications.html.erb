@@ -1,29 +1,29 @@
-<div class="page notifications row">
+<div class="page notifications row" ng-controller="NotificationsController">
   <div class="col-xs-12" style="height:initial;">
     <div class="page-header">
       <h1 class="notifications-title"><i class="icon"></i> Notificações</h1>
     </div>
   </div>
   <div class="col-xs-12 col-md-6">
-    <div class="notification-item panel panel-default">
+    <div class="notification-item panel panel-default" ng-repeat="notification in notifications">
       <div class="panel-heading">
-        <time class="notification-item-date">21/01/16 - 17:30</time>
-        <div class="notification-item-category clearfix appointment">
+        <time class="notification-item-date">{{getDate(notification.created_at)}}</time>
+        <div class="notification-item-category clearfix {{getNotificationCategorySlug(notification.category)}}">
           <i class="icon"></i>
-          Consulta
+          {{getNotificationCategoryName(notification.category)}}
         </div>
       </div>
       <div class="panel-body">
         <div class="notification-item-content">
           <p><strong>Observações:</strong></p>
-          <p class="note">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit culpa laboriosam placeat, velit officiis provident. Dolor labore, quasi totam beatae dignissimos tenetur sint corporis porro. Aperiam veniam qui similique tempora.</p>
+          <p class="note">{{notification.note}}</p>
         </div>
       </div>
       <div class="panel-footer">
         <a class="notification-item-option" href="javascript:void(0);" title="Responder">
           <i class="icon icon-answer"></i> Responder
         </a>
-        <a class="notification-item-option active" href="javascript:void(0);" title="Confirmar">
+        <a class="notification-item-option" href="javascript:void(0);" title="Confirmar">
           <i class="icon icon-confirm"></i> Confirmar
         </a>
       </div>
@@ -41,78 +41,7 @@
         </div>
       </div>
     </div>
-    <div class="notification-item panel panel-default">
-      <div class="panel-heading">
-        <time class="notification-item-date">21/01/16 - 17:30</time>
-        <div class="notification-item-category clearfix appointment">
-          <i class="icon"></i>
-          Consulta
-        </div>
-      </div>
-      <div class="panel-body">
-        <div class="notification-item-content">
-          <p><strong>Observações:</strong></p>
-          <p class="note">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit culpa laboriosam placeat, velit officiis provident. Dolor labore, quasi totam beatae dignissimos tenetur sint corporis porro. Aperiam veniam qui similique tempora.</p>
-        </div>
-      </div>
-      <div class="panel-footer">
-        <a class="notification-item-option" href="javascript:void(0);" title="Responder">
-          <i class="icon icon-answer"></i> Responder
-        </a>
-        <a class="notification-item-option active" href="javascript:void(0);" title="Confirmar">
-          <i class="icon icon-confirm"></i> Confirmar
-        </a>
-      </div>
-      <div class="panel-body" style="padding:0;">
-        <div class="notification-item-comments">
-          <textarea class="notification-item-input form-control" placeholder="Escreva uma resposta aqui"></textarea>
-          <ul class="notification-item-comments-list">
-            <li class="notification-item-comments-list-item">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat nam pariatur, placeat error impedit? Non reprehenderit, maxime ea minima perspiciatis cupiditate, harum voluptatibus, magnam ducimus quos rerum, quaerat consectetur facere.</p>
-            </li>
-            <li class="notification-item-comment">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat nam pariatur, placeat error impedit? Non reprehenderit, maxime ea minima perspiciatis cupiditate, harum voluptatibus, magnam ducimus quos rerum, quaerat consectetur facere.</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="notification-item panel panel-default">
-      <div class="panel-heading">
-        <time class="notification-item-date">21/01/16 - 17:30</time>
-        <div class="notification-item-category clearfix appointment">
-          <i class="icon"></i>
-          Consulta
-        </div>
-      </div>
-      <div class="panel-body">
-        <div class="notification-item-content">
-          <p><strong>Observações:</strong></p>
-          <p class="note">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit culpa laboriosam placeat, velit officiis provident. Dolor labore, quasi totam beatae dignissimos tenetur sint corporis porro. Aperiam veniam qui similique tempora.</p>
-        </div>
-      </div>
-      <div class="panel-footer">
-        <a class="notification-item-option" href="javascript:void(0);" title="Responder">
-          <i class="icon icon-answer"></i> Responder
-        </a>
-        <a class="notification-item-option active" href="javascript:void(0);" title="Confirmar">
-          <i class="icon icon-confirm"></i> Confirmar
-        </a>
-      </div>
-      <div class="panel-body" style="padding:0;">
-        <div class="notification-item-comments">
-          <textarea class="notification-item-input form-control" placeholder="Escreva uma resposta aqui"></textarea>
-          <ul class="notification-item-comments-list">
-            <li class="notification-item-comments-list-item">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat nam pariatur, placeat error impedit? Non reprehenderit, maxime ea minima perspiciatis cupiditate, harum voluptatibus, magnam ducimus quos rerum, quaerat consectetur facere.</p>
-            </li>
-            <li class="notification-item-comment">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat nam pariatur, placeat error impedit? Non reprehenderit, maxime ea minima perspiciatis cupiditate, harum voluptatibus, magnam ducimus quos rerum, quaerat consectetur facere.</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <p ng-show="notifications.length == 0">Você ainda não publicou nenhuma notificação</p>
   </div>
   <div class="col-xs-12 col-md-3">
     <div class="notification-widget panel panel-default">
@@ -158,7 +87,7 @@
   <div class="col-xs-12 col-md-3">
     <aside class="notification-sidebar">
       <div class="notification-widget">
-        <%= form_for :notification, url: api_v1_notifications_path(format: :json), method: :post do |f| %>
+        <%= form_for :notification, url: api_v1_notifications_path(format: :json), method: :post, html: {"ng-submit": "createNotification($event)"} do |f| %>
           <%= f.hidden_field :user_id, value: @current_user.id %>
           <h2 class="notification-widget-title">Criar nova notificação</h2>
           <label class="notification-widget-subtitle">Tipo de Notificação:</label>
@@ -178,10 +107,16 @@
                 <%= f.radio_button :category, Notification::CATEGORY_SURGERY %> Cirurgia
               </label>
             </div>
+            <p class="text-danger" ng-repeat="error in errors.category">
+              <small>{{error}}</small>
+            </p>
           </div>
           <div class="form-group">
             <%= f.label :note, 'Observação' %>
             <%= f.text_area :note, class: 'form-control input-sm' %>
+            <p class="text-danger" ng-repeat="error in errors.note">
+              <small>{{error}}</small>
+            </p>
           </div>
           <div class="form-group">
             <%= f.button 'Criar notificação', type: :submit, class: 'btn btn-success' %>
