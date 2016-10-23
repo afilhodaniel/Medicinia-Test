@@ -5,11 +5,31 @@ class ApplicationController < ActionController::Base
   before_action :set_current_user
 
   def index
-    if is_authenticated
-      render :notifications
-    else
-      render :index
-    end
+    render :index
+  end
+
+  def patients
+    @sidebar = :patients
+
+    render :patients
+  end
+
+  def notifications
+    @sidebar = :notifications
+    
+    render :notifications
+  end
+
+  def messages
+    @sidebar = :messages
+
+    render :messages
+  end
+
+  def tasks
+    @sidebar = :tasks
+    
+    render :tasks
   end
 
   private

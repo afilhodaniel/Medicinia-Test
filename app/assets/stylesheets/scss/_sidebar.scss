@@ -1,0 +1,100 @@
+.sidebar {
+  margin: 0 -15px;
+  height: 100%;
+  background: #ebebeb;
+
+  @media (min-width: 992px) {
+    position: fixed;
+    margin: 0;
+    left: 0;
+  }
+
+  .sidebar-menu {
+    .sidebar-menu-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      
+      .sidebar-menu-list-item {
+        float: left;
+
+        @media (min-width: 992px) {
+          float: initial;
+        }
+
+        &:first-child {
+          a {
+            &.active {
+              @media (min-width: 992px) {
+                border-top: none;
+              }
+            }
+          }
+        }
+
+        a {
+          display: block;
+          padding: 15px;
+          text-align: center;
+
+          @media (min-width: 992px) {
+            padding: 15px 7.5px;
+          }
+
+          &.active {
+            background: #fff;
+            border-left: 1px solid #e1e1e1;
+            border-right: 1px solid #e1e1e1;
+            color: #ef803d;
+
+            @media (min-width: 992px) {
+              border-left: none;
+              border-right: none;
+              border-top: 1px solid #e1e1e1;
+              border-bottom: 1px solid #e1e1e1;
+            }
+
+            .icon {
+              &.icon-patients {
+                @include sprite($patients-active);
+              }
+
+              &.icon-notifications {
+                @include sprite($notifications-active);
+              }
+
+              &.icon-messages {
+                @include sprite($messages-active);
+              }
+
+              &.icon-tasks {
+                @include sprite($tasks-active);
+              }
+            }
+          }
+          
+          .icon {
+            display: block;
+            margin: 0 auto 5px;
+
+            &.icon-patients {
+              @include sprite($patients);
+            }
+
+            &.icon-notifications {
+              @include sprite($notifications);
+            }
+
+            &.icon-messages {
+              @include sprite($messages);
+            }
+
+            &.icon-tasks {
+              @include sprite($tasks);
+            }
+          }
+        }
+      }
+    }
+  }
+}

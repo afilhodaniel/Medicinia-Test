@@ -1,0 +1,260 @@
+.page {
+  &.notifications {
+    .notifications-title {
+      line-height: 40px;
+      color: #173151;
+
+      .icon {
+        @include sprite($notifications-title);
+        float: left;
+        display: block;
+        margin-right: 15px;
+      }
+    }
+
+    .notification-item {
+      border-color: #e1e1e1;
+
+      .panel-heading {
+        padding: 0;
+        background: #f5f5f5;
+
+        .notification-item-date {
+          display: block;
+          padding: 5px;
+          width: 100%;
+          text-align: right;
+          letter-spacing: -0.5px;
+          font-size: 13px;
+        }
+
+        .notification-item-category {
+          padding: 5px 15px;
+          line-height: 25px;
+          color: #fff;
+
+          &.exam {
+            background: #92278f;
+
+            .icon {
+              @include sprite($exam);
+            }
+          }
+
+          &.appointment {
+            background: #006eb6;
+
+            .icon {
+              @include sprite($appointment);
+            }
+          }
+
+          &.surgery {
+            background: #8dc63f;
+
+            .icon {
+              @include sprite($surgery);
+            }
+          }
+
+          .icon {
+            display: block;
+            float: left;
+            margin-right: 5px;
+          }
+        }
+      }
+
+      .panel-body {
+        background: #f5f5f5;
+
+        .notification-item-content {
+          p {
+            margin-bottom: 0;
+
+            &.note {
+              line-height: 18px;
+              font-size: 13px;
+            }
+          }
+        }
+
+        .notification-item-comments {
+          display: none;
+          padding: 15px;
+
+          &.active {
+            display: block;
+          }
+
+          .notification-item-input {
+            margin-bottom: 15px;
+            resize: none;
+          }
+
+          .notification-item-comments-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            line-height: 18px;
+            font-size: 13px;
+
+            .notification-item-comments-list-item {
+              margin-bottom: 15px;
+              padding-bottom: 15px;
+              border-bottom: 1px solid #e1e1e1;
+
+              &:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+              }
+
+              p {
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+
+      .panel-footer {
+        padding: 5px 15px;
+        border-top: none;
+        background: #ebebeb;
+
+        .notification-item-option {
+          display: inline-block;
+          margin-right: 15px;
+          text-decoration: none;
+
+          &.active {
+            .icon {
+              &.icon-confirm {
+                @include sprite($confirm-active);
+              }
+            }
+          }
+
+          .icon {
+            position: relative;
+            top: 3.5px;
+            display: inline-block;
+            margin-right: 5px;
+
+            &.icon-answer {
+              @include sprite($answer);
+            }
+
+            &.icon-confirm {
+              @include sprite($confirm);
+            }
+          }
+        }
+      }
+    }
+
+    .notification-widget {
+      background: #f5f5f5;
+
+      .notification-widget-title {
+        margin: 0 0 10px;
+        padding: 0;
+        font-size: 20px;
+        color: #173151;
+      }
+      
+      .notification-widget-subtitle {
+        margin-bottom: 0;
+      }
+
+      .form-group {
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .radio {
+          margin: 0 0 5px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          label {
+            input[type=radio] {
+              @include appearance(none);
+              position: relative;
+              top: 3px;
+              display: inline-block;
+              width: 17px;
+              height: 17px;
+              border-radius: 3px;
+              border: 2px solid #e1e1e1;
+              background: transparent;
+
+              &:checked {
+                outline: none;
+                
+                &:before {
+                  display: block;
+                  content: "";
+                  position: absolute;
+                  top: 2px;
+                  left: 2px;
+                  width: 9px;
+                  height: 9px;
+                  background: #e1e1e1;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      label {
+        font-weight: 400;
+      }
+
+    }
+
+    .notification-sidebar {
+      padding: 15px 0;
+      background: #f1f0f0;
+
+      @media (min-width: 992px) {
+        position: absolute;
+        top: -100px;
+        left: 15px;
+        right: 0;
+        padding: 100px 15px 0;
+      }
+
+
+      &:before {
+        position: absolute;
+        z-index: -1;
+        display: block;
+        content: "";
+        width: 100%;
+        height: 1000%;
+        background: #f1f0f0;
+        top: 0;
+        left: 0;
+      }
+
+      .notification-widget {
+        background: transparent;
+
+        textarea {
+          resize: none;
+          height: 80px;
+        }
+
+        button {
+          display: block;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

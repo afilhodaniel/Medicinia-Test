@@ -15,48 +15,72 @@
     <%= stylesheet_link_tag 'application' %>
   </head>
   <body ng-controller="AppController">
-    <nav class="navbar navbar-default navbar-static-top">
+    <header class="header">
+      <nav class="header-content navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+          <%= link_to 'Medicinia', root_path, class: 'header-logo navbar-brand' %>
+          <div class="navbar-header">
+            <button type="button" class="header-toggle navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="header-menu collapse navbar-collapse" id="collapse">
+            <ul class="header-menu-list nav navbar-nav navbar-right">
+              <% if @current_user %>
+                <li><%= link_to t('link.signout'), sessions_signout_path, title: t('link.signout') %></li>
+              <% else %>
+                <li><%= link_to t('link.signin'), sessions_signin_path, title: t('link.signin') %></li>
+                <li><%= link_to t('link.signup'), sessions_signup_path, title: t('link.signup') %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="wrapper">
       <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse" id="collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to t('link.home'), root_path, title: t('link.home') %></li>
-            <% if @current_user %>
-              <li><%= link_to t('link.signout'), sessions_signout_path, title: t('link.signout') %></li>
-            <% else %>
-              <li><%= link_to t('link.signin'), sessions_signin_path, title: t('link.signin') %></li>
-              <li><%= link_to t('link.signup'), sessions_signup_path, title: t('link.signup') %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-12 col-md-1">
-          <aside class="sidebar">
-            <nav class="sidebar-menu">
-              <ul class="sidebar-menu-list">
-                <li class="sidebar-menu-list-item">
-                  <a href="" title="">
-                    <i class="icon icon-notifications"></i>
-                    Notificações
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </aside>
-        </div>
-        <div class="col-xs-12 col-md-11">
-          <div class="content">
-            <%= yield %>
+        <div class="row">
+          <% if @current_user %>
+            <div class="col-xs-12 col-md-1">
+              <aside class="sidebar">
+                <nav class="sidebar-menu">
+                  <ul class="sidebar-menu-list clearfix">
+                    <li class="sidebar-menu-list-item">
+                      <%= link_to patients_path, class: @sidebar == :patients ? 'active' : '' do %>
+                        <i class="icon icon-patients"></i>
+                        Pacientes
+                      <% end %>
+                    </li>
+                    <li class="sidebar-menu-list-item">
+                      <%= link_to notifications_path, class: @sidebar == :notifications ? 'active' : '' do %>
+                        <i class="icon icon-notifications"></i>
+                        Notificações
+                      <% end %>
+                    </li>
+                    <li class="sidebar-menu-list-item">
+                      <%= link_to messages_path, class: @sidebar == :messages ? 'active' : '' do %>
+                        <i class="icon icon-messages"></i>
+                        Conversas
+                      <% end %>
+                    </li>
+                    <li class="sidebar-menu-list-item">
+                      <%= link_to tasks_path, class: @sidebar == :tasks ? 'active' : '' do %>
+                        <i class="icon icon-tasks"></i>
+                        Tarefas
+                      <% end %>
+                    </li>
+                  </ul>
+                </nav>
+              </aside>
+            </div>
+          <% end %>
+          <div class="col-xs-12 <%= @current_user ? 'col-md-11' : '' %>">
+            <div class="content">
+              <%= yield %>
+            </div>
           </div>
         </div>
       </div>

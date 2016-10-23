@@ -11,22 +11,187 @@ $icon-home: x y offset_x offset_y width height total_width total_height image_pa
 At the bottom of this section, we provide information about the spritesheet itself
 $spritesheet: width height image $spritesheet-sprites;
 */
-$hammer-name: 'hammer';
-$hammer-x: 0px;
-$hammer-y: 0px;
-$hammer-offset-x: 0px;
-$hammer-offset-y: 0px;
-$hammer-width: 16px;
-$hammer-height: 16px;
-$hammer-total-width: 16px;
-$hammer-total-height: 16px;
-$hammer-image: '/images/sprites.png';
-$hammer: (0px, 0px, 0px, 0px, 16px, 16px, 16px, 16px, '/images/sprites.png', 'hammer', );
-$spritesheet-width: 16px;
-$spritesheet-height: 16px;
+$answer-name: 'answer';
+$answer-x: 45px;
+$answer-y: 110px;
+$answer-offset-x: -45px;
+$answer-offset-y: -110px;
+$answer-width: 20px;
+$answer-height: 20px;
+$answer-total-width: 167px;
+$answer-total-height: 135px;
+$answer-image: '/images/sprites.png';
+$answer: (45px, 110px, -45px, -110px, 20px, 20px, 167px, 135px, '/images/sprites.png', 'answer', );
+$appointment-name: 'appointment';
+$appointment-x: 96px;
+$appointment-y: 80px;
+$appointment-offset-x: -96px;
+$appointment-offset-y: -80px;
+$appointment-width: 25px;
+$appointment-height: 25px;
+$appointment-total-width: 167px;
+$appointment-total-height: 135px;
+$appointment-image: '/images/sprites.png';
+$appointment: (96px, 80px, -96px, -80px, 25px, 25px, 167px, 135px, '/images/sprites.png', 'appointment', );
+$confirm-active-name: 'confirm-active';
+$confirm-active-x: 25px;
+$confirm-active-y: 110px;
+$confirm-active-offset-x: -25px;
+$confirm-active-offset-y: -110px;
+$confirm-active-width: 20px;
+$confirm-active-height: 20px;
+$confirm-active-total-width: 167px;
+$confirm-active-total-height: 135px;
+$confirm-active-image: '/images/sprites.png';
+$confirm-active: (25px, 110px, -25px, -110px, 20px, 20px, 167px, 135px, '/images/sprites.png', 'confirm-active', );
+$confirm-name: 'confirm';
+$confirm-x: 146px;
+$confirm-y: 80px;
+$confirm-offset-x: -146px;
+$confirm-offset-y: -80px;
+$confirm-width: 20px;
+$confirm-height: 20px;
+$confirm-total-width: 167px;
+$confirm-total-height: 135px;
+$confirm-image: '/images/sprites.png';
+$confirm: (146px, 80px, -146px, -80px, 20px, 20px, 167px, 135px, '/images/sprites.png', 'confirm', );
+$exam-name: 'exam';
+$exam-x: 121px;
+$exam-y: 80px;
+$exam-offset-x: -121px;
+$exam-offset-y: -80px;
+$exam-width: 25px;
+$exam-height: 25px;
+$exam-total-width: 167px;
+$exam-total-height: 135px;
+$exam-image: '/images/sprites.png';
+$exam: (121px, 80px, -121px, -80px, 25px, 25px, 167px, 135px, '/images/sprites.png', 'exam', );
+$logo-name: 'logo';
+$logo-x: 0px;
+$logo-y: 0px;
+$logo-offset-x: 0px;
+$logo-offset-y: 0px;
+$logo-width: 167px;
+$logo-height: 40px;
+$logo-total-width: 167px;
+$logo-total-height: 135px;
+$logo-image: '/images/sprites.png';
+$logo: (0px, 0px, 0px, 0px, 167px, 40px, 167px, 135px, '/images/sprites.png', 'logo', );
+$messages-active-name: 'messages-active';
+$messages-active-x: 30px;
+$messages-active-y: 40px;
+$messages-active-offset-x: -30px;
+$messages-active-offset-y: -40px;
+$messages-active-width: 31px;
+$messages-active-height: 30px;
+$messages-active-total-width: 167px;
+$messages-active-total-height: 135px;
+$messages-active-image: '/images/sprites.png';
+$messages-active: (30px, 40px, -30px, -40px, 31px, 30px, 167px, 135px, '/images/sprites.png', 'messages-active', );
+$messages-name: 'messages';
+$messages-x: 61px;
+$messages-y: 40px;
+$messages-offset-x: -61px;
+$messages-offset-y: -40px;
+$messages-width: 31px;
+$messages-height: 30px;
+$messages-total-width: 167px;
+$messages-total-height: 135px;
+$messages-image: '/images/sprites.png';
+$messages: (61px, 40px, -61px, -40px, 31px, 30px, 167px, 135px, '/images/sprites.png', 'messages', );
+$notifications-active-name: 'notifications-active';
+$notifications-active-x: 73px;
+$notifications-active-y: 80px;
+$notifications-active-offset-x: -73px;
+$notifications-active-offset-y: -80px;
+$notifications-active-width: 23px;
+$notifications-active-height: 30px;
+$notifications-active-total-width: 167px;
+$notifications-active-total-height: 135px;
+$notifications-active-image: '/images/sprites.png';
+$notifications-active: (73px, 80px, -73px, -80px, 23px, 30px, 167px, 135px, '/images/sprites.png', 'notifications-active', );
+$notifications-title-name: 'notifications-title';
+$notifications-title-x: 0px;
+$notifications-title-y: 40px;
+$notifications-title-offset-x: 0px;
+$notifications-title-offset-y: -40px;
+$notifications-title-width: 30px;
+$notifications-title-height: 40px;
+$notifications-title-total-width: 167px;
+$notifications-title-total-height: 135px;
+$notifications-title-image: '/images/sprites.png';
+$notifications-title: (0px, 40px, 0px, -40px, 30px, 40px, 167px, 135px, '/images/sprites.png', 'notifications-title', );
+$notifications-name: 'notifications';
+$notifications-x: 50px;
+$notifications-y: 80px;
+$notifications-offset-x: -50px;
+$notifications-offset-y: -80px;
+$notifications-width: 23px;
+$notifications-height: 30px;
+$notifications-total-width: 167px;
+$notifications-total-height: 135px;
+$notifications-image: '/images/sprites.png';
+$notifications: (50px, 80px, -50px, -80px, 23px, 30px, 167px, 135px, '/images/sprites.png', 'notifications', );
+$patients-active-name: 'patients-active';
+$patients-active-x: 122px;
+$patients-active-y: 40px;
+$patients-active-offset-x: -122px;
+$patients-active-offset-y: -40px;
+$patients-active-width: 30px;
+$patients-active-height: 30px;
+$patients-active-total-width: 167px;
+$patients-active-total-height: 135px;
+$patients-active-image: '/images/sprites.png';
+$patients-active: (122px, 40px, -122px, -40px, 30px, 30px, 167px, 135px, '/images/sprites.png', 'patients-active', );
+$patients-name: 'patients';
+$patients-x: 92px;
+$patients-y: 40px;
+$patients-offset-x: -92px;
+$patients-offset-y: -40px;
+$patients-width: 30px;
+$patients-height: 30px;
+$patients-total-width: 167px;
+$patients-total-height: 135px;
+$patients-image: '/images/sprites.png';
+$patients: (92px, 40px, -92px, -40px, 30px, 30px, 167px, 135px, '/images/sprites.png', 'patients', );
+$surgery-name: 'surgery';
+$surgery-x: 0px;
+$surgery-y: 110px;
+$surgery-offset-x: 0px;
+$surgery-offset-y: -110px;
+$surgery-width: 25px;
+$surgery-height: 25px;
+$surgery-total-width: 167px;
+$surgery-total-height: 135px;
+$surgery-image: '/images/sprites.png';
+$surgery: (0px, 110px, 0px, -110px, 25px, 25px, 167px, 135px, '/images/sprites.png', 'surgery', );
+$tasks-active-name: 'tasks-active';
+$tasks-active-x: 25px;
+$tasks-active-y: 80px;
+$tasks-active-offset-x: -25px;
+$tasks-active-offset-y: -80px;
+$tasks-active-width: 25px;
+$tasks-active-height: 30px;
+$tasks-active-total-width: 167px;
+$tasks-active-total-height: 135px;
+$tasks-active-image: '/images/sprites.png';
+$tasks-active: (25px, 80px, -25px, -80px, 25px, 30px, 167px, 135px, '/images/sprites.png', 'tasks-active', );
+$tasks-name: 'tasks';
+$tasks-x: 0px;
+$tasks-y: 80px;
+$tasks-offset-x: 0px;
+$tasks-offset-y: -80px;
+$tasks-width: 25px;
+$tasks-height: 30px;
+$tasks-total-width: 167px;
+$tasks-total-height: 135px;
+$tasks-image: '/images/sprites.png';
+$tasks: (0px, 80px, 0px, -80px, 25px, 30px, 167px, 135px, '/images/sprites.png', 'tasks', );
+$spritesheet-width: 167px;
+$spritesheet-height: 135px;
 $spritesheet-image: '/images/sprites.png';
-$spritesheet-sprites: ($hammer, );
-$spritesheet: (16px, 16px, '/images/sprites.png', $spritesheet-sprites, );
+$spritesheet-sprites: ($answer, $appointment, $confirm-active, $confirm, $exam, $logo, $messages-active, $messages, $notifications-active, $notifications-title, $notifications, $patients-active, $patients, $surgery, $tasks-active, $tasks, );
+$spritesheet: (167px, 135px, '/images/sprites.png', $spritesheet-sprites, );
 
 /*
 The provided mixins are intended to be used with the array-like variables
@@ -39,13 +204,20 @@ The provided mixins are intended to be used with the array-like variables
   @include sprite($icon-email);
 }
 
-Here are example usages in HTML:
+Example usage in HTML:
 
 `display: block` sprite:
 <div class="icon-home"></div>
 
-`display: inline-block` sprite:
-<img class="icon-home" />
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
 */
 @mixin sprite-width($sprite) {
   width: nth($sprite, 5);

@@ -1,0 +1,31 @@
+.header {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+
+  .header-content {
+    margin-bottom: 0;
+    background: #fff;
+    border-bottom-color: #dcdcdc;
+  
+    .header-logo {
+      @include sprite($logo);
+      margin: 15px 0 !important;
+      padding: 0;
+      text-indent: -9999px;
+    }
+
+    .header-toggle {
+      margin-top: 18px;
+    }
+
+    .header-menu {
+      .header-menu-list {
+        @media (min-width: 768px) {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}

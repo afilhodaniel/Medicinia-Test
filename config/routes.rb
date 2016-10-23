@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root 'application#index'
 
+  get '/patients', to: 'application#patients'
+  get '/notifications', to: 'application#notifications'
+  get '/messages', to: 'application#messages'
+  get '/tasks', to: 'application#tasks'
+
   namespace :sessions do
     get  '/unauthenticated', action: :unauthenticated
     get  '/signin',  action: :signin_get
