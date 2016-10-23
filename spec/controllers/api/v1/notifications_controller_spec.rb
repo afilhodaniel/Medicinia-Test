@@ -8,12 +8,12 @@ RSpec.describe Api::V1::NotificationsController, type: :controller do
 
   describe "#index" do
     context "when the request is made in json format" do
-      let(:notifications) { create_list(:notification, 10) }
+      let(:notifications) { create_list(:notification, 10, user_id: @current_user.id) }
       
-      before { get :index, format: :json }
+      before { get :index, user_id: @current_user.id, format: :json }
 
       it "gets an array of notifications" do
-        expect(assigns(:notifications)).to eq(notifications)
+        expect(assigns(:notifications)).to match_array(notifications)
       end
 
       it "render the :index template" do
@@ -31,10 +31,10 @@ RSpec.describe Api::V1::NotificationsController, type: :controller do
   end
 
   describe "#show" do
-    let(:notification) { FactoryGirl.create(:notification) }
+    let(:notification) { FactoryGirl.create(:notification, user_id: @current_user.id) }
 
     context "when the request has valid fields" do
-      before { get :show, id: notification.id, format: :json }
+      before { get :show, id: notification.id, user_id: @current_user.id, format: :json }
 
       it "gets a notification object" do
         expect(assigns(:errors)).to be_falsy
@@ -100,10 +100,10 @@ RSpec.describe Api::V1::NotificationsController, type: :controller do
   end
 
   describe "#update" do
-    let(:notification) { FactoryGirl.create(:notification) }
+    let(:notification) { FactoryGirl.create(:notification, user_id: @current_user.id) }
 
     context "when the request has valid fields" do
-      before { put :update, id: notification.id, notification: FactoryGirl.attributes_for(:notification, category: Faker::Number.between(0, 2)), format: :json }
+      before { put :update, id: notification.id, user_id: @current_user.id, notification: FactoryGirl.attributes_for(:notification, category: Faker::Number.between(0, 2)), format: :json }
 
       it "gets a valid notification object" do
         expect(assigns(:errors)).to be_falsy
@@ -116,7 +116,7 @@ RSpec.describe Api::V1::NotificationsController, type: :controller do
     end
 
     context "when the request has invalid fields" do
-      before { put :update, id: notification.id, notification: FactoryGirl.attributes_for(:notification, category: nil), format: :json }
+      before { put :update, id: notification.id, user_id: @current_user.id, notification: FactoryGirl.attributes_for(:notification, category: nil), format: :json }
 
       it "gets a invalid notification object" do
         expect(assigns(:errors)).to be_truthy
@@ -138,10 +138,10 @@ RSpec.describe Api::V1::NotificationsController, type: :controller do
   end
 
   describe "#delete" do
-    let(:notification) { FactoryGirl.create(:notification) }
+    let(:notification) { FactoryGirl.create(:notification, user_id: @current_user.id) }
 
     context "when the request has valid fields" do
-      before { delete :destroy, id: notification.id, format: :json }
+      before { delete :destroy, id: notification.id, user_id: @current_user.id, format: :json }
 
       it "gets a valid notification object" do
         expect(assigns(:errors)).to be_falsy

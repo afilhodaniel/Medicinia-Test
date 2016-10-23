@@ -13,7 +13,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
       before { get :index, format: :json }
 
       it "gets an array of comments" do
-        expect(assigns(:comments)).to eq(comments)
+        expect(assigns(:comments)).to match_array(comments)
       end
 
       it "render the :index template" do

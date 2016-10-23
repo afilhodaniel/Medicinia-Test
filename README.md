@@ -35,3 +35,9 @@ Inicie a aplicação:
 ```shell
   rails s
 ```
+
+Para rodar todos os testes:
+
+```shell
+  rspec
+```

@@ -74,7 +74,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
 
     context "when de request has invalid fields" do
-      before { post :create, user: FactoryGirl.attributes_for(:user, password_confirmation: nil), format: :json }
+      before { post :create, user: FactoryGirl.attributes_for(:user, name: nil), format: :json }
 
       it "gets an invalid user object" do
         expect(assigns(:errors)).to be_truthy
